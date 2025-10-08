@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
   name: daily-payments-cron
-  namespace: argo
+  namespace: default
 spec:
   schedule: "*/10 * * * *" 
   timezone: "America/Sao_Paulo"
