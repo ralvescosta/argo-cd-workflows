@@ -10,7 +10,7 @@ spec:
         parameters:
           - name: job
       container:
-        image: rafaelbodao/fakejob:latest
+        image: rafaelbodao/fakejob
       env:
         - name: SECONDS_TO_SLEEP
           value: "5"
