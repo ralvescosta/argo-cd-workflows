@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cron-workflows
+  name: workflows-crons
   namespace: argocd
 spec:
   project: default
