@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: template-manual-approval
+  namespace: default
+spec:
+  templates:
+    - name: manual-approval
+      suspend:
+        duration: "24h"
+
+    - name: awaiting-approval
+      inputs:
+        parameters:
+          - name: job   # <— propagate which job name to run after approval
+      steps:
+        - - name: wait-approval
+            template: manual-approval
+        - - name: run-successful-job
+            templateRef:
+              name: template-successful-job
+              template: successful-job
+            arguments:
+              parameters:
+                - name: job
+                  value: "{{inputs.parameters.job}}"

@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: basic-cron
+  namespace: default
+spec:
+  schedule: "*/2 * * * *" 
+  timezone: "America/Sao_Paulo"
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  workflowSpec:
+    entrypoint: run-fakejob
+    templates:
+      - name: run-fakejob
+        container:
+          image: rafaelbodao/fakejob
+          env:
+            - name: SECONDS_TO_SLEEP
+              value: "5"

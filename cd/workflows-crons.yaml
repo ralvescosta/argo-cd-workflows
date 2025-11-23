@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workflows-crons
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: argo
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/ralvescosta/argo-cd-workflows
+    targetRevision: main
+    path: workflows/cron
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

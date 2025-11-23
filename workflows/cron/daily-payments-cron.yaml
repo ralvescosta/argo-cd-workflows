@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: daily-payments-cron
+  namespace: default
+spec:
+  schedule: "*/2 * * * *" 
+  timezone: "America/Sao_Paulo"
+  startingDeadlineSeconds: 600
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2
+  workflowTemplateRef:
+    name: template-payments-wf

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: template-successful-job
+  namespace: default
+spec:
+  templates:
+    - name: successful-job
+      inputs:
+        parameters:
+          - name: job
+      container:
+        image: rafaelbodao/fakejob
+        env:
+          - name: SECONDS_TO_SLEEP
+            value: "5"
